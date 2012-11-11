@@ -23,7 +23,7 @@ import com.google.android.gcm.GCMRegistrar;
 public class GCMIntentService extends GCMBaseIntentService {
 	private static final String LOG_PREFIX = "NWCLOUD-GCM";
 	// Project_id is part of Google API Console URL of the project
-	private static final String PROJECT_ID = "170560228105";
+	private static final String PROJECT_ID = "590144826040";
 	private int notificationCounter = 1;
 
 	/**
