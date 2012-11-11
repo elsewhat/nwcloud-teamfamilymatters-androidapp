@@ -96,6 +96,11 @@ public class MainActivity extends Activity {
         taskGetDevices.execute();
     }
     
+    public void actionReRegisterDevice(){
+    	GCMIntentService.register(this);
+    }
+    
+    
     private void postDeviceRemove(boolean successful){
     	if(successful){
     		informUserAboutMessage("Will refetch recipients from sapnwcloud backend");
@@ -124,7 +129,7 @@ public class MainActivity extends Activity {
 	    builder.setContentTitle(contentTitle);
 	    builder.setContentText(contentText);
 	    builder.setTicker(tickerText);
-	    
+	    builder.setPriority(Notification.PRIORITY_MAX);
 	    builder.setSmallIcon(android.R.drawable.ic_menu_help);
 	    //builder.setLargeIcon(android.R.drawable.ic_input_get);
 	    builder.addAction(android.R.drawable.ic_menu_add, "Yes", contentIntent);
@@ -202,6 +207,11 @@ public class MainActivity extends Activity {
 			informUserAboutMessage("Will delete this device's information from sapnwcloud backend");
 			actionRemoveMyDevice();
 			return true;
+		case R.id.menu_reregister_device:
+			informUserAboutMessage("Reregistering devices to GCM and backend");
+			actionReRegisterDevice();
+			return true;
+		
 		default:
 			return super.onMenuItemSelected(featureId, item);
 		}

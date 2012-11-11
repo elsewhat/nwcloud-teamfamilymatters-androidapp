@@ -8,4 +8,9 @@
         android:title="@string/menu_delete_device"
         android:orderInCategory="110"
         android:showAsAction="never" />
+    
+        <item android:id="@+id/menu_reregister_device"
+        android:title="@string/menu_reregister_device"
+        android:orderInCategory="120"
+        android:showAsAction="never" />
 </menu>

@@ -35,7 +35,7 @@ import com.google.api.client.util.Key;
  */
 public class NWCloudBackend {
 	protected static final String LOG_PREFIX = "NWCLOUD-GCM";
-	protected static final String NWCLOUD_BACKEND_URL="https://familymatterinnojam.netweaver.ondemand.com/nwcloud-androidgcm-backend/";
+	protected static final String NWCLOUD_BACKEND_URL="https://familymatterinnojam.netweaver.ondemand.com/nwcloud-teamfamilymatters-backend/";
 	protected static final String LOCAL_BACKEND_URL = "http://192.168.1.6:8433/nwcloud-teamfamilymatters-backend/";
 	
 	//Use this to switch which backend you want to use

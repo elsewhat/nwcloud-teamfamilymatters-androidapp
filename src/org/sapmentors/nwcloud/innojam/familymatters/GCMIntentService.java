@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
@@ -70,23 +72,35 @@ public class GCMIntentService extends GCMBaseIntentService {
 	private void createNotification(String message) {
 		Log.i(LOG_PREFIX, "createNotification with message " + message);
 
-		int icon = android.R.drawable.ic_input_get; // icon from resources
-		CharSequence tickerText = "New message delivered by #SAPNWCloud"; // ticker-text
-		long when = System.currentTimeMillis(); // notification time
-		Context context = getApplicationContext(); // application Context
-		CharSequence contentTitle = "#SAPNWCloud GCM Message"; // message title
-		CharSequence contentText = message; // message text
+		int notificationCounter=0;
 
-		Intent notificationIntent = new Intent(this, MainActivity.class);
+		CharSequence contentTitle = "Request for babysitting";
+		CharSequence tickerText = "Request for babysitting"; // message title
+		String contentText = message;
+		
+		Intent notificationIntent = new Intent(this, NotificationResponseActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
 
-		// the next two lines initialize the Notification, using the
-		// configurations above
-		Notification notification = new Notification(icon, tickerText, when);
-		notification.setLatestEventInfo(context, contentTitle, contentText,
-				contentIntent);
+		
+		 Bitmap notificationPhoto = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.kid);
+		
+		Notification.Builder builder;
+		builder = new Notification.Builder(getApplicationContext());
+	    builder.setContentTitle(contentTitle);
+	    builder.setContentText(contentText);
+	    builder.setTicker(tickerText);
+	    
+	    builder.setSmallIcon(android.R.drawable.ic_menu_help);
+	    //builder.setLargeIcon(android.R.drawable.ic_input_get);
+	    builder.addAction(android.R.drawable.ic_menu_add, "Yes", contentIntent);
+	    builder.addAction(android.R.drawable.ic_menu_delete, "No", contentIntent);
+	    //builder.addAction(R.drawable.ic_launcher, "Launcher", notificationIntent);
+	    builder.build();
 
+	    Notification notification = new Notification.BigPictureStyle(builder).bigPicture(notificationPhoto).build();
+		
+		
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(notificationCounter++, notification);
 	}
