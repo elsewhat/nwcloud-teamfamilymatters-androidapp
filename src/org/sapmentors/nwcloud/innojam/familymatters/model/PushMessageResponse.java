@@ -1,4 +1,4 @@
-package org.sapmentors.nwcloud.gcm.model;
+package org.sapmentors.nwcloud.innojam.familymatters.model;
 
 import com.google.api.client.util.Key;
 

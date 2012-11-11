@@ -1,11 +1,11 @@
-package org.sapmentors.nwcloud.gcm.backend;
+package org.sapmentors.nwcloud.innojam.familymatters.backend;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 
-import org.sapmentors.nwcloud.gcm.model.PushMessageResponse;
-import org.sapmentors.nwcloud.gcm.util.AndroidUtils;
+import org.sapmentors.nwcloud.innojam.familymatters.model.PushMessageResponse;
+import org.sapmentors.nwcloud.innojam.familymatters.util.AndroidUtils;
 
 import android.content.Context;
 import android.util.Log;
@@ -35,8 +35,8 @@ import com.google.api.client.util.Key;
  */
 public class NWCloudBackend {
 	protected static final String LOG_PREFIX = "NWCLOUD-GCM";
-	protected static final String NWCLOUD_BACKEND_URL="https://androidgcmbackendp013234trial.nwtrial.ondemand.com/nwcloud-androidgcm-backend/";
-	protected static final String LOCAL_BACKEND_URL = "http://192.168.1.6:8080/nwcloud-androidgcm-backend/";
+	protected static final String NWCLOUD_BACKEND_URL="https://familymatterinnojam.netweaver.ondemand.com/nwcloud-androidgcm-backend/";
+	protected static final String LOCAL_BACKEND_URL = "http://192.168.1.6:8433/nwcloud-teamfamilymatters-backend/";
 	
 	//Use this to switch which backend you want to use
 	protected static final String BASE_BACKEND_URL= NWCLOUD_BACKEND_URL;

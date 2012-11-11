@@ -1,7 +1,7 @@
-package org.sapmentors.nwcloud.gcm;
+package org.sapmentors.nwcloud.innojam.familymatters;
 
-import org.sapmentors.nwcloud.gcm.backend.NWCloudBackend;
-import org.sapmentors.nwcloud.gcm.util.AndroidUtils;
+import org.sapmentors.nwcloud.innojam.familymatters.backend.NWCloudBackend;
+import org.sapmentors.nwcloud.innojam.familymatters.util.AndroidUtils;
 
 import android.app.Notification;
 import android.app.NotificationManager;

@@ -1,17 +1,24 @@
-package org.sapmentors.nwcloud.gcm;
+package org.sapmentors.nwcloud.innojam.familymatters;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sapmentors.nwcloud.gcm.backend.MobileDevice;
-import org.sapmentors.nwcloud.gcm.backend.NWCloudBackend;
-import org.sapmentors.nwcloud.gcm.backend.PushMessageExternal;
-import org.sapmentors.nwcloud.gcm.model.PushMessageResponse;
-import org.sapmentors.nwcloud.gcm.util.AndroidUtils;
+import org.sapmentors.nwcloud.innojam.familymatters.R;
+import org.sapmentors.nwcloud.innojam.familymatters.backend.MobileDevice;
+import org.sapmentors.nwcloud.innojam.familymatters.backend.NWCloudBackend;
+import org.sapmentors.nwcloud.innojam.familymatters.backend.PushMessageExternal;
+import org.sapmentors.nwcloud.innojam.familymatters.model.PushMessageResponse;
+import org.sapmentors.nwcloud.innojam.familymatters.util.AndroidUtils;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +101,44 @@ public class MainActivity extends Activity {
     		informUserAboutMessage("Will refetch recipients from sapnwcloud backend");
     		actionRefreshRecipientEmails();
     	}
+    }
+    
+    public void actionCreateDummyNotification(View view){
+    	
+    	informUserAboutMessage("Dummy notification");
+    	int notificationCounter=0;
+
+		CharSequence contentTitle = "Request for babysitting";
+		CharSequence tickerText = "Request for babysitting"; // message title
+		String contentText = "Are you able to babysit for Phil's kid today?";
+		
+		Intent notificationIntent = new Intent(this, NotificationResponseActivity.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				notificationIntent, 0);
+
+		
+		 Bitmap notificationPhoto = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.kid);
+		
+		Notification.Builder builder;
+		builder = new Notification.Builder(getApplicationContext());
+	    builder.setContentTitle(contentTitle);
+	    builder.setContentText(contentText);
+	    builder.setTicker(tickerText);
+	    
+	    builder.setSmallIcon(android.R.drawable.ic_menu_help);
+	    //builder.setLargeIcon(android.R.drawable.ic_input_get);
+	    builder.addAction(android.R.drawable.ic_menu_add, "Yes", contentIntent);
+	    builder.addAction(android.R.drawable.ic_menu_delete, "No", contentIntent);
+	    //builder.addAction(R.drawable.ic_launcher, "Launcher", notificationIntent);
+	    builder.build();
+
+	    Notification notification = new Notification.BigPictureStyle(builder).bigPicture(notificationPhoto).build();
+		
+		
+		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(notificationCounter++, notification);
+    	
+    	
     }
     
     

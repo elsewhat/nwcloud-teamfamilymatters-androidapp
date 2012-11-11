@@ -1,4 +1,4 @@
-package org.sapmentors.nwcloud.gcm.util;
+package org.sapmentors.nwcloud.innojam.familymatters.util;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
