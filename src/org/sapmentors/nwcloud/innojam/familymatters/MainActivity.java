@@ -179,6 +179,8 @@ public class MainActivity extends Activity {
     	
     	pushMessageExternal.setMessage(editMessage.getText().toString());
     	pushMessageExternal.setEmailFrom(AndroidUtils.getPrimaryAccountEmail(this));
+    	pushMessageExternal.setId("2");
+    	pushMessageExternal.setMessageType(2);
     	
     	ArrayList<String> arEmailTo = new ArrayList<String>(10);
     	String strSelectedEmailTo = (String)spinnerEmailTo.getSelectedItem();

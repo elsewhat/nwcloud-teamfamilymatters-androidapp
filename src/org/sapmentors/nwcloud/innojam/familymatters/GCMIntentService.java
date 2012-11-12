@@ -1,5 +1,7 @@
 package org.sapmentors.nwcloud.innojam.familymatters;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.sapmentors.nwcloud.innojam.familymatters.backend.NWCloudBackend;
 import org.sapmentors.nwcloud.innojam.familymatters.util.AndroidUtils;
 
@@ -69,21 +71,51 @@ public class GCMIntentService extends GCMBaseIntentService {
 		createNotification(message);
 	}
 
-	private void createNotification(String message) {
-		Log.i(LOG_PREFIX, "createNotification with message " + message);
+	private void createNotification(String jsonMessage) {
+		Log.i(LOG_PREFIX, "createNotification with message " + jsonMessage);
 
 		int notificationCounter=0;
 
-		CharSequence contentTitle = "Request for babysitting";
-		CharSequence tickerText = "Request for babysitting"; // message title
+		JSONObject jsonObject;
+		String idToService = null;
+		String message = null;
+		int messageType = 0;
+		try {
+			jsonObject = new JSONObject(jsonMessage);
+			idToService = jsonObject.getString("id");
+			message = jsonObject.getString("message");
+			messageType = jsonObject.getInt("type");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			message=jsonMessage;
+			idToService="1";
+			messageType=0;
+		}
+		
+		
+		
+		CharSequence contentTitle = null;
+		CharSequence tickerText = null;
+		Bitmap notificationPhoto =null;
+		
+		if(messageType<=1){
+			contentTitle = "Can you babysit today";
+			tickerText = contentTitle;
+			notificationPhoto = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.kid);
+		}else {
+			contentTitle = "Play date today?";
+			tickerText = contentTitle;
+			notificationPhoto = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.playground);
+			
+		}
 		String contentText = message;
+		
 		
 		Intent notificationIntent = new Intent(this, NotificationResponseActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				notificationIntent, 0);
 
-		
-		 Bitmap notificationPhoto = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.kid);
 		
 		Notification.Builder builder;
 		builder = new Notification.Builder(getApplicationContext());

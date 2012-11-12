@@ -20,17 +20,28 @@ public class PushMessageExternal {
 	protected int messageType; 
 	@Key
 	protected String message;
+	@Key
+	protected String id;
 	
 	
 	
 	public PushMessageExternal(String emailFrom, String[] emailTo,
-			int messageType, String message) {
+			int messageType, String message, String id) {
 		this.emailFrom = emailFrom;
 		this.emailTo = emailTo;
 		this.messageType = messageType;
 		this.message = message;
+		this.id=id;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public PushMessageExternal() {
 	}
 	
